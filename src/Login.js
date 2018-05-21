@@ -1,0 +1,55 @@
+import React,{Component} from 'react'
+var crypto = require('crypto'),
+    algorithm = 'aes-256-ctr';
+export default class Login extends Component{
+    constructor()
+    {
+        super()
+        this.handlesubmit2 = this.handlesubmit2.bind(this)
+        this.decrypt = this.decrypt.bind(this)
+    }
+    async handlesubmit2(e)
+    {
+        e.preventDefault()
+        var id = this.refs.patid.value
+        var pwd = this.refs.lpwd.value
+        var dpwd = this.refs.dpwd.value
+        let response = await fetch(`http://localhost:5000/login/${id}/${pwd}`)
+        let response_json = await response.json();
+        let result = response_json.result;
+        console.log(result)
+        if(result!="Error")
+        {
+            this.props.history.push(`/patientview/${result.id}/${result.pbkey}/${result.pvtkey}`)
+            var ans = await this.decrypt(result.pvtkey,dpwd)
+            if(ans.substr(0,6)=="pvtkey")
+            {
+                var fans = ans.substr(7)
+                console.log(fans)
+                
+            }
+
+        }
+
+    }
+    async decrypt(text,password){
+        var decipher = crypto.createDecipher(algorithm,password)
+        var dec = decipher.update(text,'hex','utf8')
+        dec += decipher.final('utf8');
+        return dec;
+    }
+    render(){
+        return(
+            <div className="Login">
+                <div className="Login-form">
+                    <form onSubmit={this.handlesubmit2}>
+                        <input ref="patid" className="login-page_input" type="text" placeholder="Enter Patient ID" />
+                        <input ref="lpwd" className="login-page_input" type="text" placeholder="Enter Login Password" />
+                        <input ref="dpwd" className="login-page_input" type="text" placeholder="Enter Decryption Password" />
+                        <button className="login-page_button">Submit</button>
+                    </form>
+                </div>
+            </div>
+        )
+    }
+}
