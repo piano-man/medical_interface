@@ -22,18 +22,11 @@ export default class PatientView extends Component{
     }
 
     async decrypt(privateKey, encryptedData) {
-        console.log(privateKey)
-        console.log(encryptedData)
+        //console.log(privateKey)
+        //console.log(encryptedData)
         let userPrivateKey = new Buffer(privateKey, 'hex');
-        //var buffer = Buffer.from(arrayBuffer)
-        var t = toBuffer(userPrivateKey)
-        console.log(Buffer.isBuffer(userPrivateKey))
-        console.log("voila")
         let bufferEncryptedData = new Buffer(encryptedData, 'base64');
-        var t1 = toBuffer(bufferEncryptedData)
-        console.log(Buffer.isBuffer(bufferEncryptedData))
-        let decryptedData = ecies.decrypt(t, t1);
-        console.log("stuck")
+        let decryptedData = ecies.decrypt(userPrivateKey,bufferEncryptedData);
         console.log(decryptedData)
         return decryptedData.toString('utf8');
     }
@@ -53,20 +46,20 @@ export default class PatientView extends Component{
     }
     async viewrecords()
     {
-        console.log("viewing records")
+        //console.log("viewing records")
         var arr = new Array()
         var arrhash = new Array()
         const rel = Storet.getPatientHash(this.props.match.params.id).toString()
-        console.log(rel)
+        //console.log(rel)
         var len = rel.split(',').length
         for(var i=0;i<len;i+=2)
         {
             var ipfsdata
             var hash = web3.toAscii(rel.split(',')[i]).replace(/[^a-zA-Z0-9]/g, "")+web3.toAscii(rel.split(',')[i+1]).replace(/[^a-zA-Z0-9]/g, "")
-            console.log(hash)
+            //console.log(hash)
             arrhash.push(hash)
             var ipfsdata = await this.retrieveIpfs(hash)
-            console.log(ipfsdata)
+            //console.log(ipfsdata)
             arr.push(ipfsdata);  
                       
         }
@@ -82,9 +75,9 @@ export default class PatientView extends Component{
         var farray = new Array()
         var pwd = this.refs.dpwd.value
         var epvtkey = this.props.match.params.pvtkey
-        console.log(epvtkey)
+        // console.log(epvtkey)
         var pvtkey = await this.keydecrypt(epvtkey,pwd)
-        console.log("here")
+        // console.log("here")
         //console.log(pvtkey.substr(7))
         var fpvtkey = pvtkey.substr(7)
         var arr = this.state.ipfsdata
@@ -92,23 +85,23 @@ export default class PatientView extends Component{
         var len = arr.length
         for(var i = 0;i<len;i++)
         {
-            console.log("in loop")
-            console.log(arr[0])
-            console.log(fpvtkey)
-            //var fdata = await this.decrypt(fpvtkey.toString(),arr[i].toString())
-         var fdata = await fetch(`http://localhost:5000/decryptrecord/`,{
-            method:"POST",
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body:JSON.stringify({"data":arr[i],
-        "pvtkey":fpvtkey})
-        })
+            // console.log("in loop")
+            // console.log(arr[0])
+            // console.log(fpvtkey)
+            var fdata = await this.decrypt(fpvtkey.toString(),arr[i].toString())
+        //  var fdata = await fetch(`http://localhost:5000/decryptrecord/`,{
+        //     method:"POST",
+        //       headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body:JSON.stringify({"data":arr[i],
+        // "pvtkey":fpvtkey})
+        // })
         var fdata_json = await fdata.json()
-            console.log(fdata_json)
+            // console.log(fdata_json)
             var result = fdata_json.decryptedData
-            console.log(result)
+            // console.log(result)
             var final_data = JSON.parse(result)
             farray.push(final_data)
         }

@@ -11,8 +11,8 @@ export default class AccessModify extends Component{
     constructor(props)
     {
         super(props)
-        this.handlesubmit = this.handlesubmit.bind(this)
-        this.handlesubmit2 = this.handlesubmit2.bind(this)
+        this.grantaccess = this.grantaccess.bind(this)
+        this.grantaccess2 = this.grantaccess2.bind(this)
     }
 
     async getHospitals()
@@ -23,14 +23,19 @@ export default class AccessModify extends Component{
         console.log(this.props.hashes)
         console.log(this.props.records)
     }
-    async handlesubmit()
+    async grantaccess()
     {
         var hname = this.refs.hname.value;
         var rhash = this.refs.rhash.value;
+        var combkey = this.props.match.params.id+hname
+        Access.GrantAccess(combkey,web3.fromAscii(rhash.substr(0,24)),web3.fromAscii(rhash.substr(24,46)),{from: web3.eth.accounts[2], gas:3000000})
     }
 
-    async handlesubmit2()
-    {
+    async revokeaccess()
+    { 
+        var hname = this.refs.hnamerevoke.value;
+        var combkey = this.props.match.params.id+hname
+        Access.RevokeAccess(combkey)
 
     }
 
@@ -42,12 +47,12 @@ export default class AccessModify extends Component{
     {
         return(
             <div>
-                    <form onSubmit={this.handlesubmit}>
+                    <form onSubmit={this.grantaccess}>
                         <input ref="hname" className="hospital-name" type="text" placeholder="Enter Hospital Name" />
                         <input ref="rhash" className="record-hash" type="text" placeholder="Enter Hash of Record" />
                         <button className="signup-page_button">Grant Access</button>
                     </form>
-                    <form onSubmit={this.handlesubmit2}>
+                    <form onSubmit={this.revokeaccess}>
                         <input ref="hnamerevoke" className="hospital-name-revoke" type="text" placeholder="Enter Hospital Name" />
                         <button className="signup-page_button">Revoke Access</button>
                     </form>
