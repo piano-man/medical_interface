@@ -2,9 +2,9 @@
 var fs = require('fs');
 Web3 = require('web3');
 web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-abi = JSON.parse('[{"constant":false,"inputs":[{"name":"patientkey","type":"string"},{"name":"hash1","type":"bytes32"},{"name":"hash2","type":"bytes32"}],"name":"storeHash","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"num","type":"uint256"}],"name":"getPatientHash","outputs":[{"name":"","type":"string"},{"name":"","type":"bytes32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"patientArray","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getListLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
+var abi = JSON.parse('[{"constant":false,"inputs":[{"name":"patientkey","type":"string"},{"name":"hash1","type":"bytes32"},{"name":"hash2","type":"bytes32"}],"name":"storeHash","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"patientArray","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"hash","type":"string"}],"name":"getPatientHash","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getListLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
 
-var contractAddress = '0xc48f1963571fda71468fa62e662da4d268acb6b6'
+var contractAddress = '0xc756cf423df320f634670b10b2e71ee61162c79f'
 VotingContract = web3.eth.contract(abi);
 // In your nodejs console, execute contractInstance.address to get the address at which the contract is deployed and change the line below to use your deployed address
 contractInstance = VotingContract.at(contractAddress);
@@ -23,11 +23,11 @@ web3.eth.defaultAccount=web3.eth.accounts[2];
  
 //  console.log("HASH:", hash);
 // });
-const hash = 'QmXPD5rpQhJjKq6jwvs4N6TQmbRjL7EvMoikAeYGmebRTf';
+const hash = 'QmajgiCyXfRbJeogcGD3DjkkFVvbV8b8Noprfyk52qUPRS';
 contractInstance.storeHash("1234",web3.fromAscii(hash.substr(0,24)),web3.fromAscii(hash.substr(24,46)),{from: web3.eth.accounts[2], gas:3000000});
 var l = contractInstance.getListLength();
 console.log(l.toString())
-var l2 = contractInstance.getPatientHash(0,{from: web3.eth.accounts[2], gas:3000000}).toString();
+var l2 = contractInstance.getPatientHash("1234",{from: web3.eth.accounts[2], gas:3000000}).toString();
 console.log(l2)
 //extraacting data from hash
 // ipfs.cat(hash, (err, data) => {
