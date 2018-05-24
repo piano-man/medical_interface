@@ -12,24 +12,28 @@ export default class PatientView extends Component{
     constructor(props)
     {
         super(props);
+        this.viewrecords = this.viewrecords.bind(this)
+        this.createrecord = this.createrecord.bind(this)
     
     }
 
     viewrecords(e)
     {
         e.preventDefault()
+        this.props.history.push(`/hospitslrecords/${this.props.match.params.id}/${this.props.match.params.pbkey}/${this.props.match.params.pvtkey}`)
     }
 
     createrecord(e)
     {
         e.preventDefault()
+        this.props.history.push(`/createrecord/${this.props.match.params.id}/${this.props.match.params.pbkey}/${this.props.match.params.pvtkey}`)
     }
     render()
     {
         return(
             <div className="patient-view">
                 <button onClick={this.viewrecords} className="view-rec">View Patient Records</button>
-                <button onClick={this.creayerecord} className="view-rec">Create new Record</button>
+                <button onClick={this.createrecord} className="view-rec">Create new Record</button>
             </div>
         )
     }
