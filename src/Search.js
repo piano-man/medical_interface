@@ -8,11 +8,15 @@ import Signup from './Signup'
 import PatientView from './PatientView'
 import AccessModify from './AccessModify'
 import Test from './Test'
+import HospitalLogin from './HospitalLogin'
+import HospitalSignup from './HospitalSignup'
+import HospitalView from './HospitalView'
 
 export default class Search extends Component {
     constructor(){
         super()
         this.getRecords = this.getRecords.bind(this)
+        // this.getAllRecords = this.getAllRecords.bind(this)
     }
     getRecords(hash,records)
     {
@@ -23,6 +27,14 @@ export default class Search extends Component {
             records:records
         })
     }
+    // getAllRecords(hash,records)
+    // {
+    //     console.log(hash)
+    //     console.log(records)
+    //     this.setState({
+    //         all_records:records
+    //     })
+    // }
     render(){
         return(
             <div>
@@ -31,7 +43,10 @@ export default class Search extends Component {
             <Route exact path='/hospital' component={Hospital}/>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/signup' component={Signup}/>
+            <Route exact path='/hospital_login' component={HospitalLogin}/>
+            <Route exact path='/hospital_signup' component={HospitalSignup}/>
             <Route exact path='/test' component={Test}/>
+            <Route exact path='/hospitalview/:id/:pbkey/:pvtkey' render={(props) => <HospitalView {...props} getRecords={this.getRecords} />}/>
             <Route exact path='/patientview/:id/:pbkey/:pvtkey' render={(props) => <PatientView {...props} getRecords={this.getRecords} />}/>
             <Route exact path='/access/:id/:pbkey/:pvtkey' render={(props) => <AccessModify {...props} hashes = {this.state.hash} records = {this.state.records}/>}/>
             </div>

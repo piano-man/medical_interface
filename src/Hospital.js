@@ -4,11 +4,22 @@ export default class Patient extends Component{
     {
         super()
     }
+
+    patientlogin()
+    {
+        this.props.history.push(`/hospital_login`)
+    }
+    patientsignup()
+    {
+        this.props.history.push(`/hospital_signup`)
+    }
+
     render()
     {
         return(
-            <div>
-            Hospital Works
+            <div className="Hospital">
+                <button onClick={this.patientlogin} className="Hospital-login">LOGIN</button>
+                <button onClick={this.patientsignup} className="Hospital-signup">SIGNUP</button>               
             </div>
         )
     }

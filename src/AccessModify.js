@@ -11,8 +11,10 @@ export default class AccessModify extends Component{
     constructor(props)
     {
         super(props)
+        this.getHospitals = this.getHospitals.bind(this)
         this.grantaccess = this.grantaccess.bind(this)
-        this.grantaccess2 = this.grantaccess2.bind(this)
+        this.revokeaccess = this.revokeaccess.bind(this)
+        this.getipfshash = this.getipfshash.bind(this)
     }
 
     async getHospitals()
@@ -22,20 +24,54 @@ export default class AccessModify extends Component{
         console.log(response_json.result)
         console.log(this.props.hashes)
         console.log(this.props.records)
-    }
-    async grantaccess()
+    }  
+
+    async getipfshash(buf)
     {
-        var hname = this.refs.hname.value;
+        var hash = await ipfs.add(buf)
+        return hash;
+    }
+    async grantaccess(e)
+    {
+        e.preventDefault()
+        var hashes = this.props.hashes
+        var records = this.props.records
+        var hkey = this.refs.hname.value;
         var rhash = this.refs.rhash.value;
-        var combkey = this.props.match.params.id+hname
-        Access.GrantAccess(combkey,web3.fromAscii(rhash.substr(0,24)),web3.fromAscii(rhash.substr(24,46)),{from: web3.eth.accounts[2], gas:3000000})
+        var combkey = this.props.match.params.id+hkey
+        var ind = hashes.indexOf(rhash)
+        console.log(ind)
+        var rec = records[ind]
+        console.log("hello")
+        console.log(rec)
+        //var ans = this.encrypt(hkey.toString(),rec.toString())
+        var ans = await fetch(`http://localhost:5000/encryptrecord`,{
+            method:"POST",
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify({"data":rec,
+        "pbkey":hkey})
+        })
+        var ans_json = await ans.json();
+        console.log(ans_json.encryptedData)
+        var buf = Buffer.from(ans_json.encryptedData, 'utf8');
+        var hash = await this.getipfshash(buf)
+        var fhash = hash[0].hash
+        console.log(fhash)
+        Access.GrantAccess(combkey,web3.fromAscii(fhash.substr(0,24)),web3.fromAscii(fhash.substr(24,46)),{from: web3.eth.accounts[2], gas:3000000})
+        console.log("success")
     }
 
-    async revokeaccess()
-    { 
+    async revokeaccess(e)
+    {
+        e.preventDefault() 
         var hname = this.refs.hnamerevoke.value;
         var combkey = this.props.match.params.id+hname
-        Access.RevokeAccess(combkey)
+        console.log(combkey)
+        Access.RevokeAccess(combkey.toString(),{from: web3.eth.accounts[2], gas:3000000})
+        console.log("revoke success")
 
     }
 

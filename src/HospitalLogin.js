@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 var crypto = require('crypto'),
     algorithm = 'aes-256-ctr';
-export default class Login extends Component{
+export default class HospitalLogin extends Component{
     constructor()
     {
         super()
@@ -13,14 +13,13 @@ export default class Login extends Component{
         e.preventDefault()
         var id = this.refs.patid.value
         var pwd = this.refs.lpwd.value
-       // var dpwd = this.refs.dpwd.value
-        let response = await fetch(`http://localhost:5000/login/${id}/${pwd}`)
+        let response = await fetch(`http://localhost:5000/hospitallogin/${id}/${pwd}`)
         let response_json = await response.json();
         let result = response_json.result;
         console.log(result)
         if(result!="Error")
         {
-            this.props.history.push(`/patientview/${result.id}/${result.pbkey}/${result.pvtkey}`)
+            this.props.history.push(`/hospitalview/${result.id}/${result.pbkey}/${result.pvtkey}`)
 
         }
 

@@ -88,16 +88,16 @@ export default class PatientView extends Component{
             // console.log("in loop")
             // console.log(arr[0])
             // console.log(fpvtkey)
-            var fdata = await this.decrypt(fpvtkey.toString(),arr[i].toString())
-        //  var fdata = await fetch(`http://localhost:5000/decryptrecord/`,{
-        //     method:"POST",
-        //       headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body:JSON.stringify({"data":arr[i],
-        // "pvtkey":fpvtkey})
-        // })
+            //var fdata = await this.decrypt(fpvtkey.toString(),arr[i].toString())
+         var fdata = await fetch(`http://localhost:5000/decryptrecord/`,{
+            method:"POST",
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify({"data":arr[i],
+        "pvtkey":fpvtkey})
+        })
         var fdata_json = await fdata.json()
             // console.log(fdata_json)
             var result = fdata_json.decryptedData
