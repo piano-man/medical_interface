@@ -5,7 +5,7 @@
   "dependencies": {
     "buffer": "^5.1.0",
     "crypto-json": "^2.0.0",
-    "eth-ecies": "^1.0.2",
+    "eth-ecies": "^1.0.3",
     "ethereumjs-util": "^5.2.0",
     "ganache-cli": "^6.1.0",
     "ipfs-api": "^21.0.0",

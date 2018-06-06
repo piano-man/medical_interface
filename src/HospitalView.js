@@ -20,7 +20,7 @@ export default class PatientView extends Component{
     viewrecords(e)
     {
         e.preventDefault()
-        this.props.history.push(`/hospitslrecords/${this.props.match.params.id}/${this.props.match.params.pbkey}/${this.props.match.params.pvtkey}`)
+        this.props.history.push(`/hospitalrecords/${this.props.match.params.id}/${this.props.match.params.pbkey}/${this.props.match.params.pvtkey}`)
     }
 
     createrecord(e)

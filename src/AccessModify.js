@@ -84,7 +84,7 @@ export default class AccessModify extends Component{
         return(
             <div>
                     <form onSubmit={this.grantaccess}>
-                        <input ref="hname" className="hospital-name" type="text" placeholder="Enter Hospital Name" />
+                        <input ref="hname" className="hospital-name" type="text" placeholder="Enter Hospital Public Key" />
                         <input ref="rhash" className="record-hash" type="text" placeholder="Enter Hash of Record" />
                         <button className="signup-page_button">Grant Access</button>
                     </form>

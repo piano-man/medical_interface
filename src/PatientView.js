@@ -26,7 +26,9 @@ export default class PatientView extends Component{
         //console.log(encryptedData)
         let userPrivateKey = new Buffer(privateKey, 'hex');
         let bufferEncryptedData = new Buffer(encryptedData, 'base64');
+        console.trace()
         let decryptedData = ecies.decrypt(userPrivateKey,bufferEncryptedData);
+        console.trace()
         console.log(decryptedData)
         return decryptedData.toString('utf8');
     }
@@ -46,20 +48,20 @@ export default class PatientView extends Component{
     }
     async viewrecords()
     {
-        //console.log("viewing records")
+        console.log("viewing records")
         var arr = new Array()
         var arrhash = new Array()
         const rel = Storet.getPatientHash(this.props.match.params.id).toString()
-        //console.log(rel)
+        console.log(rel)
         var len = rel.split(',').length
         for(var i=0;i<len;i+=2)
         {
             var ipfsdata
             var hash = web3.toAscii(rel.split(',')[i]).replace(/[^a-zA-Z0-9]/g, "")+web3.toAscii(rel.split(',')[i+1]).replace(/[^a-zA-Z0-9]/g, "")
-            //console.log(hash)
+            console.log(hash)
             arrhash.push(hash)
             var ipfsdata = await this.retrieveIpfs(hash)
-            //console.log(ipfsdata)
+            console.log(ipfsdata)
             arr.push(ipfsdata);  
                       
         }
@@ -88,21 +90,25 @@ export default class PatientView extends Component{
             // console.log("in loop")
             // console.log(arr[0])
             // console.log(fpvtkey)
-            //var fdata = await this.decrypt(fpvtkey.toString(),arr[i].toString())
-         var fdata = await fetch(`http://localhost:5000/decryptrecord/`,{
-            method:"POST",
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body:JSON.stringify({"data":arr[i],
-        "pvtkey":fpvtkey})
-        })
-        var fdata_json = await fdata.json()
+            var fdata = await this.decrypt(fpvtkey.toString(),arr[i].toString())
+           console.log(fpvtkey.toString())
+           console.log(arr[i].toString())
+        //  var fdata = await fetch(`http://localhost:5000/decryptrecord/`,{
+        //     method:"POST",
+        //       headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body:JSON.stringify({"data":arr[i],
+        // "pvtkey":fpvtkey})
+        // })
+        // var fdata_json = await fdata.json()
             // console.log(fdata_json)
-            var result = fdata_json.decryptedData
-            // console.log(result)
-            var final_data = JSON.parse(result)
+        //     var result = fdata_json.decryptedData
+        //  console.log(result)
+        console.log(fdata)
+            var final_data = JSON.parse(fdata)
+            console.log(final_data)
             farray.push(final_data)
         }
         console.log(farray)
