@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import styles from './css/Signup.module.css';
 const util = require('ethereumjs-util')
 const ecies = require("eth-ecies");
 var crypto = require('crypto'),
@@ -45,16 +46,25 @@ export default class HospitalSignup extends Component{
     render()
     {
         return(
-            <div className="Signup">
-                <div className="Signup-form">
-                    <form onSubmit={this.handlesubmit}>
+            <div className={styles.signup}>
+            <div></div>
+                <div className={styles.form}>
+                    <form className={styles.insideform} onSubmit={this.handlesubmit}>
+                      
                         <input ref="patid" className="signup-page_input" type="text" placeholder="Enter Patient ID" />
+                     
+                        
                         <input ref="pvtkey" className="signup-page_input" type="text" placeholder="Enter Private Key" />
+                     
                         <input ref="pwd" className="signup-page_input" type="text" placeholder="Enter Access Password" />
+                       
                         <input ref="lpwd" className="signup-page_input" type="text" placeholder="Enter Login Password" />
+                       
                         <button className="signup-page_button">Submit</button>
+                       
                     </form>
                 </div>
+                <div></div>
             </div>
         )
     }

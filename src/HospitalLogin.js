@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import styles from './css/Signup.module.css';
 var crypto = require('crypto'),
     algorithm = 'aes-256-ctr';
 export default class HospitalLogin extends Component{
@@ -32,14 +33,16 @@ export default class HospitalLogin extends Component{
     }
     render(){
         return(
-            <div className="Login">
-                <div className="Login-form">
-                    <form onSubmit={this.handlesubmit2}>
+            <div className={styles.signup}>
+            <div></div>
+                <div className={styles.form}>
+                    <form className={styles.insideform} onSubmit={this.handlesubmit2}>
                         <input ref="patid" className="login-page_input" type="text" placeholder="Enter Patient ID" />
                         <input ref="lpwd" className="login-page_input" type="text" placeholder="Enter Login Password" />
                         <button className="login-page_button">Submit</button>
                     </form>
                 </div>
+            <div></div>
             </div>
         )
     }

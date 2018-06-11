@@ -1,0 +1,10 @@
+.container{
+    display:grid;
+    grid-template-rows:40vh 20vh 40vh;
+}
+.select {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
