@@ -15,6 +15,7 @@ export default class AccessModify extends Component{
         this.grantaccess = this.grantaccess.bind(this)
         this.revokeaccess = this.revokeaccess.bind(this)
         this.getipfshash = this.getipfshash.bind(this)
+        this.state={}
     }
 
     async getHospitals()
@@ -22,6 +23,9 @@ export default class AccessModify extends Component{
         let response = await fetch(`http://localhost:5000/getHospitals`)
         let response_json = await response.json()
         console.log(response_json.result)
+        this.setState({
+            hospitals:response_json.result
+        })
         console.log(this.props.hashes)
         console.log(this.props.records)
     }  
@@ -34,10 +38,12 @@ export default class AccessModify extends Component{
     async grantaccess(e)
     {
         e.preventDefault()
+        console.log(this.hosp.value)
+        console.log(this.hash.value)
         var hashes = this.props.hashes
         var records = this.props.records
-        var hkey = this.refs.hname.value;
-        var rhash = this.refs.rhash.value;
+        var hkey = this.hosp.value;
+        var rhash = this.hash.value;
         var combkey = this.props.match.params.id+hkey
         var ind = hashes.indexOf(rhash)
         console.log(ind)
@@ -79,19 +85,44 @@ export default class AccessModify extends Component{
     {
         this.getHospitals()
     }
+
+    renderHosp(hospital)
+    {
+        return(
+            <option value={hospital.pbkey}>{hospital.id}</option>
+        )
+    }
+    renderHash(hash)
+    {
+        return(
+            <option value={hash}>{hash}</option>
+        )
+    }
     render()
     {
+        if(this.state.hospitals!=null)
+        {
         return(
             <div>
                     <form onSubmit={this.grantaccess}>
-                        <input ref="hname" className="hospital-name" type="text" placeholder="Enter Hospital Public Key" />
-                        <input ref="rhash" className="record-hash" type="text" placeholder="Enter Hash of Record" />
+                       <select id = "dropdown" ref = {(input)=> this.hosp = input}>
+                       {this.state.hospitals.map(this.renderHosp)}
+                        </select>
+                        <select id = "dropdown" ref = {(input)=> this.hash = input}>
+                       {this.props.hashes.map(this.renderHash)}
+                        </select>
                         <button className="signup-page_button">Grant Access</button>
                     </form>
                     <form onSubmit={this.revokeaccess}>
                         <input ref="hnamerevoke" className="hospital-name-revoke" type="text" placeholder="Enter Hospital Name" />
                         <button className="signup-page_button">Revoke Access</button>
                     </form>
+            </div>
+        )
+        }
+        return(
+            <div>
+            <h1>Loading</h1>
             </div>
         )
     }

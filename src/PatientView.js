@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import web3 from './web3';
 import Storet from './Storet';
 import ipfs from './ipfs';
+import styles from './css/patientview.module.css'
 const ecies = require("eth-ecies");
 var Buffer = require('buffer/').Buffer
 var crypto = require('crypto'),
@@ -122,30 +123,58 @@ export default class PatientView extends Component{
     {
         this.props.history.push(`/access/${this.props.match.params.id}/${this.props.match.params.pbkey}/${this.props.match.params.pvtkey}`)
     }
+    renderList = (record)=>
+    {
+        return(
+            <div>
+            <li>{record.date}</li>
+            </div>
+        )
+    }
     render()
     {
         if(this.state.ipfsdata!=null&&this.state.final_record==null)
         {
             return(
-                <div>
-                    <form onSubmit={this.handlesubmit}>
+                <div className={styles.signup}>
+                <div></div>
+                <div className={styles.form}>
+                    <form className={styles.insideform} onSubmit={this.handlesubmit}>
                         <input ref="dpwd" className="decryption-password" type="text" placeholder="Enter Decryption Password" />
                         <button className="signup-page_button">Decrypt Records</button>
                     </form>
+                </div>
+                <div></div>
                 </div>
             )
         }
         if(this.state.final_record!=null)
         {
             return(
+                <div className={styles.patientview}>
                 <div>
+                <ul>
+                {this.state.final_record.map(this.renderList)}
+                </ul>
+                </div>
+                <div>
+                <div className={styles.buttoncontainer}>
                 <button onClick={this.accessmodify} className="access-grant">Modify Access</button>
+                </div>
+                </div>
+                <div></div>
                 </div>
             )
         }
         return(
-            <div className="patient-view">
+            <div className={styles.patientview}>
+            <div></div>
+            <div className={styles.buttoncontainer}>
+            <div>
                 <button onClick={this.viewrecords} className="view-rec">View Records</button>
+            </div>
+            </div>
+            <div></div>
             </div>
         )
     }
