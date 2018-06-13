@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import ipfs from './ipfs';
 import web3 from './web3';
 import Storet from './Storet';
-
+import styles from './css/Signup.module.css'
 export default class CreateRecord extends Component{
     constructor()
     {
@@ -55,28 +55,22 @@ export default class CreateRecord extends Component{
     
     render(){
         return(
-            <div className="Signup">
-                <div className="Signup-form">
-                    <form onSubmit={this.handlesubmit}>
+            <div className={styles.signup}>
+            <div></div>
+                <div className={styles.form}>
+                    <form className={styles.insideform} onSubmit={this.handlesubmit}>
                         <input ref = "patient_id" className = "patient_id" type = "text" placeholder = "Enter Patient ID" />
-                        <br/>
                         <input ref = "diagnosis" className = "diagnosis" type = "text" placeholder = "Enter Diagnosis" />
-                        <br/>
                         <input ref = "date" className = "date" type = "text" placeholder = "Enter Date" />
-                        <br/>
                         <input ref = "location" className = "location" type = "text" placeholder = "Enter Location" />
-                        <br/>
                         <input ref = "medication" className = "medication" type = "text" placeholder = "Enter Medication" />
-                        <br/>
                         <input ref = "suggestion" className = "suggestion" type = "text" placeholder = "Enter Suggestion" />
-                        <br/>
                         <input ref = "next_review" className = "next_review" type = "text" placeholder = "Enter Next Review" />
-                        <br/>
                         <input ref = "notes" className = "notes" type = "text" placeholder = "Enter Additional Notes" />
-                        <br/>
                         <button className="signup-page_button">Submit</button>
                     </form>
                 </div>
+            <div></div>
             </div>
         )
     }

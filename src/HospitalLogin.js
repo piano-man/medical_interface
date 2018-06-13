@@ -37,7 +37,7 @@ export default class HospitalLogin extends Component{
             <div></div>
                 <div className={styles.form}>
                     <form className={styles.insideform} onSubmit={this.handlesubmit2}>
-                        <input ref="patid" className="login-page_input" type="text" placeholder="Enter Patient ID" />
+                        <input ref="patid" className="login-page_input" type="text" placeholder="Enter Hospital ID" />
                         <input ref="lpwd" className="login-page_input" type="text" placeholder="Enter Login Password" />
                         <button className="login-page_button">Submit</button>
                     </form>

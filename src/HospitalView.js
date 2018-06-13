@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import web3 from './web3';
 import Storet from './Storet';
 import ipfs from './ipfs';
+import styles from './css/Home.module.css'
 const ecies = require("eth-ecies");
 var Buffer = require('buffer/').Buffer
 var crypto = require('crypto'),
@@ -31,9 +32,13 @@ export default class PatientView extends Component{
     render()
     {
         return(
-            <div className="patient-view">
+            <div className={styles.container}>
+            <div></div>
+            <div className={styles.select}>
                 <button onClick={this.viewrecords} className="view-rec">View Patient Records</button>
                 <button onClick={this.createrecord} className="view-rec">Create new Record</button>
+            </div>
+            <div></div>
             </div>
         )
     }

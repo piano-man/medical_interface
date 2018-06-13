@@ -3,6 +3,7 @@ import web3 from './web3';
 import Storet from './Storet';
 import ipfs from './ipfs';
 import Access from './Access';
+import styles2 from './css/Signup.module.css'
 const ecies = require("eth-ecies");
 var Buffer = require('buffer/').Buffer
 var crypto = require('crypto'),
@@ -126,7 +127,25 @@ export default class HospitalRecords extends Component{
     {
         this.getPatientList()
     }
+
+    renderList(record){
+        return(
+            <div>
+            <li>{record.date}</li>
+            </div>
+        )
+    }
     render(){
+        if(this.state.final_record!=null)
+        {
+            return(
+                <div>
+                <ul>
+                {this.state.final_record.map(this.renderList)}
+                </ul>
+                </div>
+            )
+        }
         if(this.state.ipfsdata!=null&&this.state.final_record==null)
         {
             return(
@@ -139,13 +158,15 @@ export default class HospitalRecords extends Component{
             )
         }
         return(
-            <div className="Patient_Record">
-                <div className="PR-form">
-                    <form onSubmit={this.viewrecords}>
+            <div className={styles2.signup}>
+            <div></div>
+                <div className={styles2.form}>
+                    <form className={styles2.insideform} onSubmit={this.viewrecords}>
                         <input ref="patid" className="login-page_input" type="text" placeholder="Enter Patient ID" />
                         <button className="login-page_button">View Records</button>
                     </form>
                 </div>
+                <div></div>
             </div>
         )
     }

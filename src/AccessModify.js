@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import web3 from './web3';
 import ipfs from './ipfs'
 import Access from './Access'
+import styles from './css/Signup.module.css'
 const ecies = require("eth-ecies");
 var crypto = require('crypto'),
     algorithm = 'aes-256-ctr';
@@ -73,7 +74,7 @@ export default class AccessModify extends Component{
     async revokeaccess(e)
     {
         e.preventDefault() 
-        var hname = this.refs.hnamerevoke.value;
+        var hname = this.hnamerevoke.value;
         var combkey = this.props.match.params.id+hname
         console.log(combkey)
         Access.RevokeAccess(combkey.toString(),{from: web3.eth.accounts[2], gas:3000000})
@@ -103,8 +104,9 @@ export default class AccessModify extends Component{
         if(this.state.hospitals!=null)
         {
         return(
-            <div>
-                    <form onSubmit={this.grantaccess}>
+            <div className={styles.signup}>
+            <div className={styles.form}>           
+                    <form className={styles.insideform} onSubmit={this.grantaccess}>
                        <select id = "dropdown" ref = {(input)=> this.hosp = input}>
                        {this.state.hospitals.map(this.renderHosp)}
                         </select>
@@ -113,10 +115,17 @@ export default class AccessModify extends Component{
                         </select>
                         <button className="signup-page_button">Grant Access</button>
                     </form>
-                    <form onSubmit={this.revokeaccess}>
-                        <input ref="hnamerevoke" className="hospital-name-revoke" type="text" placeholder="Enter Hospital Name" />
+            </div>
+            <div >
+            </div>
+            <div className={styles.form}>
+                    <form className={styles.insideform} onSubmit={this.revokeaccess}>
+                       <select id = "dropdown" ref = {(input)=> this.hnamerevoke = input}>
+                       {this.state.hospitals.map(this.renderHosp)}
+                        </select>
                         <button className="signup-page_button">Revoke Access</button>
                     </form>
+            </div>
             </div>
         )
         }
