@@ -1,5 +1,6 @@
 import React , {Component} from 'react'
-import styles from './css/Home.module.css'
+import styles from './css/Patient.module.css'
+
 export default class Patient extends Component{
     constructor()
     {
@@ -19,18 +20,22 @@ export default class Patient extends Component{
     render()
     {
         return(
-            <div className={styles.container}>
-            <div></div>
-            <div className={styles.select}>
-            <div>
-                <button onClick={this.patientlogin} className="Patient-login">LOGIN</button>
-            </div>
-            <div>   
-                <button onClick={this.patientsignup} className="Patient-signup">SIGNUP</button>               
-            </div>
-            </div>
-            <div></div>
-            </div>
+            
+                <div className={styles.container}>
+                    <div></div>
+                    <div className={styles.select}>
+                        <div>
+                            <button onClick={this.patientlogin} className={styles.Patientlogin}>LOGIN</button>
+                        </div>
+                        <div>   
+                            <button onClick={this.patientsignup} className={styles.Patientsignup}>SIGNUP</button>               
+                        </div>
+                    </div>
+                    <div>
+                        <p class="message" className={styles.msg}>Switch to <a href="/Hospital">Hospital</a></p>      
+                    </div>
+                </div>
+            
         )
     }
 }

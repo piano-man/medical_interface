@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import styles from './css/Signup.module.css';
+
 const util = require('ethereumjs-util')
 const ecies = require("eth-ecies");
 var crypto = require('crypto'),
@@ -47,17 +48,20 @@ export default class Signup extends Component{
     {
         return(
             <div className={styles.signup}>
-            <div></div>
-                <div className={styles.form}>
-                    <form className={styles.insideform} onSubmit={this.handlesubmit}>
-                        <input ref="patid" className="signup-page_input" type="text" placeholder="Enter Patient ID" />
-                        <input ref="pvtkey" className="signup-page_input" type="text" placeholder="Enter Private Key" />
-                        <input ref="pwd" className="signup-page_input" type="text" placeholder="Enter Access Password" />
-                        <input ref="lpwd" className="signup-page_input" type="text" placeholder="Enter Login Password" />
-                        <button className="signup-page_button">Submit</button>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div>
+                    <form className={styles.SignupForm} onSubmit={this.handlesubmit}>
+                        <input ref="patid" className={styles.signuppageinput} type="text" placeholder="Enter Patient ID" />
+                        <input ref="pvtkey" className={styles.signuppageinput} type="text" placeholder="Enter Private Key" />
+                        <input ref="pwd" className={styles.signuppageinput} type="text" placeholder="Enter Access Password" />
+                        <input ref="lpwd" className={styles.signuppageinput} type="text" placeholder="Enter Login Password" />
+                        <button className={styles.signuppagebutton}>Submit</button>
+                        <p class="message" className={styles.msg}>Already Registered? <a href="/Login">Login</a></p>      
                     </form>
                 </div>
-            <div></div>
             </div>
         )
     }
