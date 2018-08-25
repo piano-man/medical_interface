@@ -3,7 +3,7 @@ import web3 from './web3';
 import Storet from './Storet';
 import ipfs from './ipfs';
 import Access from './Access';
-import styles2 from './css/Signup.module.css'
+import styles2 from './css/HospitalRecords.module.css'
 const ecies = require("eth-ecies");
 var Buffer = require('buffer/').Buffer
 var crypto = require('crypto'),
@@ -158,14 +158,20 @@ export default class HospitalRecords extends Component{
             )
         }
         return(
-            <div className={styles2.signup}>
-            <div></div>
+            <div className={styles2.hospRecords}>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
                 <div className={styles2.form}>
                     <form className={styles2.insideform} onSubmit={this.viewrecords}>
-                        <input ref="patid" className="login-page_input" type="text" placeholder="Enter Patient ID" />
-                        <button className="login-page_button">View Records</button>
+                        <input ref="patid" className={styles2.loginpageinput} type="text" placeholder="Enter Patient ID" />
+                        <button className={styles2.loginpagebutton}>View Records</button>
                     </form>
                 </div>
+                <div></div>
+                <div></div>
+                <div></div>
                 <div></div>
             </div>
         )

@@ -1,8 +1,33 @@
 .patientview {
     display: grid;
-    grid-template-columns:40vw 20vw 40vw;
+    grid-template-columns:30vw 40vw 30vw;
     height:100vh;
 }
+
+.viewrec:hover
+{
+background-color:rgb(226, 219, 219,0.1);
+}
+
+
+.viewrec{
+    border-color: rgba(255, 255, 255, 0.6);
+    border-style: solid;
+    border-radius: 25px;
+    border-width: 2px;
+    color: rgba(255, 251, 251, 0.5);
+    background-color: rgba(255, 251, 251, 0.0);
+    width: 100%;
+    text-align-last: justify;
+    font-size: 15px;
+    padding-top:10px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
+    position: relative;
+    cursor: pointer;
+}
+
 .buttoncontainer {
     display:flex;
     flex-direction: column;

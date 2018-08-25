@@ -171,7 +171,7 @@ export default class PatientView extends Component{
             <div></div>
             <div className={styles.buttoncontainer}>
             <div>
-                <button onClick={this.viewrecords} className="view-rec">View Records</button>
+                <button onClick={this.viewrecords} className={styles.viewrec}>View Records</button>
             </div>
             </div>
             <div></div>

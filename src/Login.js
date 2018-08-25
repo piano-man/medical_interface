@@ -43,7 +43,7 @@ export default class Login extends Component{
                 <div className={styles.form}>        
                     <form className={styles.insideform} onSubmit={this.handlesubmit2}>
                         <input ref="patid" className={styles.loginpageinput} type="text" placeholder="Enter Patient ID" />
-                        <input ref="lpwd" className={styles.loginpageinput} type="text" placeholder="Enter Login Password" />
+                        <input ref="lpwd" className={styles.loginpageinput} type="password" placeholder="Enter Login Password" />
                         <button className={styles.loginpagebutton}>Submit</button>
                         <p class="message" className={styles.msg}>Not registered? <a href="/hospital_signup">Create an account</a></p>                                
                     </form>                   

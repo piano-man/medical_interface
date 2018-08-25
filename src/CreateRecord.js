@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import ipfs from './ipfs';
 import web3 from './web3';
 import Storet from './Storet';
-import styles from './css/Signup.module.css'
+import styles from './css/CreateRecord.module.css'
 export default class CreateRecord extends Component{
     constructor()
     {
@@ -55,19 +55,22 @@ export default class CreateRecord extends Component{
     
     render(){
         return(
-            <div className={styles.signup}>
-            <div></div>
+            <div className={styles.createRecord}>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
                 <div className={styles.form}>
                     <form className={styles.insideform} onSubmit={this.handlesubmit}>
-                        <input ref = "patient_id" className = "patient_id" type = "text" placeholder = "Enter Patient ID" />
-                        <input ref = "diagnosis" className = "diagnosis" type = "text" placeholder = "Enter Diagnosis" />
-                        <input ref = "date" className = "date" type = "text" placeholder = "Enter Date" />
-                        <input ref = "location" className = "location" type = "text" placeholder = "Enter Location" />
-                        <input ref = "medication" className = "medication" type = "text" placeholder = "Enter Medication" />
-                        <input ref = "suggestion" className = "suggestion" type = "text" placeholder = "Enter Suggestion" />
-                        <input ref = "next_review" className = "next_review" type = "text" placeholder = "Enter Next Review" />
-                        <input ref = "notes" className = "notes" type = "text" placeholder = "Enter Additional Notes" />
-                        <button className="signup-page_button">Submit</button>
+                        <input ref = "patient_id" className = {styles.tbox} type = "text" placeholder = "Enter Patient ID" />
+                        <input ref = "diagnosis" className = {styles.tbox} type = "text" placeholder = "Enter Diagnosis" />
+                        <input ref = "date" className = {styles.tbox} type = "text" placeholder = "Enter Date" />
+                        <input ref = "location" className = {styles.tbox} type = "text" placeholder = "Enter Location" />
+                        <input ref = "medication" className = {styles.tbox} type = "text" placeholder = "Enter Medication" />
+                        <input ref = "suggestion" className = {styles.tbox} type = "text" placeholder = "Enter Suggestion" />
+                        <input ref = "next_review" className = {styles.tbox} type = "text" placeholder = "Enter Next Review" />
+                        <input ref = "notes" className = {styles.tbox} type = "text" placeholder = "Enter Additional Notes" />
+                        <button className={styles.submitForm}>Submit</button>
                     </form>
                 </div>
             <div></div>
