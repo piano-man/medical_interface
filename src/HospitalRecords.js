@@ -149,11 +149,21 @@ export default class HospitalRecords extends Component{
         if(this.state.ipfsdata!=null&&this.state.final_record==null)
         {
             return(
-                <div>
-                    <form onSubmit={this.handlesubmit}>
-                        <input ref="dpwd" className="decryption-password" type="text" placeholder="Enter Decryption Password" />
-                        <button className="signup-page_button">Decrypt Records</button>
-                    </form>
+                <div classname={styles2.hospRecords}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div className={styles2.form}>
+                        <form className={styles2.insideform} onSubmit={this.handlesubmit}>
+                            <input ref="dpwd" className={styles2.decryptionpassword} type="password" placeholder="Enter Decryption Password" />
+                            <button className={styles2.loginpagebutton}>Decrypt Records</button>
+                        </form>
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
             )
         }

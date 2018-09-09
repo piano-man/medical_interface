@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import web3 from './web3';
 import ipfs from './ipfs'
 import Access from './Access'
-import styles from './css/Signup.module.css'
+import styles from './css/AccessModify.module.css'
 const ecies = require("eth-ecies");
 var crypto = require('crypto'),
     algorithm = 'aes-256-ctr';
@@ -105,25 +105,29 @@ export default class AccessModify extends Component{
         {
         return(
             <div className={styles.signup}>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
             <div className={styles.form}>           
                     <form className={styles.insideform} onSubmit={this.grantaccess}>
-                       <select id = "dropdown" ref = {(input)=> this.hosp = input}>
+                       <select className={styles.loginpageinput} id = "dropdown" ref = {(input)=> this.hosp = input}>
                        {this.state.hospitals.map(this.renderHosp)}
                         </select>
-                        <select id = "dropdown" ref = {(input)=> this.hash = input}>
+                        <select className={styles.loginpageinput} id = "dropdown" ref = {(input)=> this.hash = input}>
                        {this.props.hashes.map(this.renderHash)}
                         </select>
-                        <button className="signup-page_button">Grant Access</button>
+                        <button className={styles.signuppagebutton}>Grant Access</button>
                     </form>
             </div>
-            <div >
-            </div>
+            <div></div>
+            <div></div>
             <div className={styles.form}>
                     <form className={styles.insideform} onSubmit={this.revokeaccess}>
-                       <select id = "dropdown" ref = {(input)=> this.hnamerevoke = input}>
+                       <select className={styles.loginpageinput} id = "dropdown" ref = {(input)=> this.hnamerevoke = input}>
                        {this.state.hospitals.map(this.renderHosp)}
                         </select>
-                        <button className="signup-page_button">Revoke Access</button>
+                        <button className={styles.signuppagebutton}>Revoke Access</button>
                     </form>
             </div>
             </div>

@@ -48,7 +48,8 @@ export default class CreateRecord extends Component{
         var fhash = hash[0].hash
         console.log(fhash)
         Storet.storeHash(pat.pat_id,web3.fromAscii(fhash.substr(0,24)),web3.fromAscii(fhash.substr(24,46)),{from: web3.eth.accounts[2], gas:3000000});
-        var l2 = Storet.getPatientHash("1234",{from: web3.eth.accounts[2], gas:3000000}).toString();
+        console.log(pat.pat_id)
+        var l2 = Storet.getPatientHash(pat.pat_id,{from: web3.eth.accounts[2], gas:3000000}).toString();
         console.log(l2)
     }
 

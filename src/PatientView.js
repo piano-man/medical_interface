@@ -2,7 +2,8 @@ import React,{Component} from 'react';
 import web3 from './web3';
 import Storet from './Storet';
 import ipfs from './ipfs';
-import styles from './css/patientview.module.css'
+import styles from './css/patientview.module.css';
+import { Accordion, AccordionItem } from 'react-sanfona';
 const ecies = require("eth-ecies");
 var Buffer = require('buffer/').Buffer
 var crypto = require('crypto'),
@@ -52,7 +53,11 @@ export default class PatientView extends Component{
         console.log("viewing records")
         var arr = new Array()
         var arrhash = new Array()
+        console.log(this.props.match.params.id)
+        var t0 = performance.now();
         const rel = Storet.getPatientHash(this.props.match.params.id).toString()
+        var t1 = performance.now();
+        console.log(t1-t0);
         console.log(rel)
         var len = rel.split(',').length
         for(var i=0;i<len;i+=2)
@@ -127,8 +132,27 @@ export default class PatientView extends Component{
     {
         return(
             <div>
+            <li>{record.pat_id}</li>
             <li>{record.date}</li>
-            </div>
+            <li>{record.diagnosis}</li>
+            <li>{record.location}</li>
+            <li>{record.medication}</li>
+            <li>{record.suggestion}</li>
+            <li>{record.next_review}</li>
+            <li>{record.notes}</li>
+            
+             <Accordion>
+             {[1, 2, 3, 4, 5].map(item => {
+               return (
+                 <AccordionItem title={`Item ${item}`} expanded={item === 1}>
+                   <div>
+                     {`Item ${item} content`}
+                   </div>
+                 </AccordionItem>
+               );
+             })}
+           </Accordion>
+           </div>
         )
     }
     render()
@@ -137,31 +161,41 @@ export default class PatientView extends Component{
         {
             return(
                 <div className={styles.signup}>
-                <div></div>
-                <div className={styles.form}>
-                    <form className={styles.insideform} onSubmit={this.handlesubmit}>
-                        <input ref="dpwd" className="decryption-password" type="text" placeholder="Enter Decryption Password" />
-                        <button className="signup-page_button">Decrypt Records</button>
-                    </form>
-                </div>
-                <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div className={styles.form}>
+                        <form className={styles.insideform} onSubmit={this.handlesubmit}>
+                            <input ref="dpwd" className={styles.decryptionpassword} type="password" placeholder="Enter Decryption Password" />
+                            <button className={styles.signuppagebutton}>Decrypt Records</button>
+                        </form>
+                    </div>
+                    <div></div>
                 </div>
             )
         }
         if(this.state.final_record!=null)
         {
             return(
-                <div className={styles.patientview}>
+                <div className={styles.patientviewdetails}>
                 <div>
                 <ul>
                 {this.state.final_record.map(this.renderList)}
                 </ul>
                 </div>
+                <div></div>
+                <div></div>
+                <div></div>
+                
                 <div>
                 <div className={styles.buttoncontainer}>
-                <button onClick={this.accessmodify} className="access-grant">Modify Access</button>
+                <button onClick={this.accessmodify} className={styles.accessgrant}>Modify Access</button>
                 </div>
                 </div>
+                <div></div>
+                <div></div>
+                <div></div>
                 <div></div>
                 </div>
             )
