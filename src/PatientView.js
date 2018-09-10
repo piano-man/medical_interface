@@ -9,6 +9,7 @@ var Buffer = require('buffer/').Buffer
 var crypto = require('crypto'),
     algorithm = 'aes-256-ctr';
 var toBuffer = require('typedarray-to-buffer')
+var count = 0 
 
 export default class PatientView extends Component{
     constructor(props)
@@ -130,29 +131,20 @@ export default class PatientView extends Component{
     }
     renderList = (record)=>
     {
+        count++;
         return(
-            <div>
-            <li>{record.pat_id}</li>
-            <li>{record.date}</li>
-            <li>{record.diagnosis}</li>
-            <li>{record.location}</li>
-            <li>{record.medication}</li>
-            <li>{record.suggestion}</li>
-            <li>{record.next_review}</li>
-            <li>{record.notes}</li>
             
-             <Accordion>
-             {[1, 2, 3, 4, 5].map(item => {
-               return (
-                 <AccordionItem title={`Item ${item}`} expanded={item === 1}>
-                   <div>
-                     {`Item ${item} content`}
-                   </div>
-                 </AccordionItem>
-               );
-             })}
-           </Accordion>
-           </div>
+            <div key={count} className={styles.record}>
+                <p>Record number: {count}</p>        
+                <p>Date: {record.date}</p>
+                <p>Diagnosis: {record.diagnosis}</p>
+                <p>Location: {record.location}</p>
+                <p>Medication: {record.medication}</p>
+                <p>Suggestion: {record.suggestion}</p>
+                <p>Next Review: {record.next_review}</p>
+                <p>Notes: {record.notes}</p>
+               
+            </div>
         )
     }
     render()
@@ -179,24 +171,17 @@ export default class PatientView extends Component{
         {
             return(
                 <div className={styles.patientviewdetails}>
-                <div>
-                <ul>
-                {this.state.final_record.map(this.renderList)}
-                </ul>
-                </div>
-                <div></div>
-                <div></div>
-                <div></div>
+                    <div></div>
+                    
+                    <div className={styles.buttoncontainer}>
+                        <button onClick={this.accessmodify} className={styles.accessgrant}>Modify Access</button>
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <div>
+                        {this.state.final_record.map(this.renderList)}
+                    </div>
                 
-                <div>
-                <div className={styles.buttoncontainer}>
-                <button onClick={this.accessmodify} className={styles.accessgrant}>Modify Access</button>
-                </div>
-                </div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
                 </div>
             )
         }

@@ -8,7 +8,7 @@ const ecies = require("eth-ecies");
 var Buffer = require('buffer/').Buffer
 var crypto = require('crypto'),
     algorithm = 'aes-256-ctr';
-
+var count = 0 
 export default class HospitalRecords extends Component{
     constructor(props)
     {
@@ -129,9 +129,20 @@ export default class HospitalRecords extends Component{
     }
 
     renderList(record){
+        count++;
         return(
-            <div>
-            <li>{record.date}</li>
+            
+            <div key={count} className={styles2.record}>
+                <p>Record number: {count}</p> 
+                <p>Patient ID: {record.patid}</p>      
+                <p>Date: {record.date}</p>
+                <p>Diagnosis: {record.diagnosis}</p>
+                <p>Location: {record.location}</p>
+                <p>Medication: {record.medication}</p>
+                <p>Suggestion: {record.suggestion}</p>
+                <p>Next Review: {record.next_review}</p>
+                <p>Notes: {record.notes}</p>
+               
             </div>
         )
     }
@@ -139,24 +150,28 @@ export default class HospitalRecords extends Component{
         if(this.state.final_record!=null)
         {
             return(
-                <div>
-                <ul>
-                {this.state.final_record.map(this.renderList)}
-                </ul>
+                <div className={styles2.hospitalviewrecord}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div>
+                        {this.state.final_record.map(this.renderList)}
+                    </div>
                 </div>
             )
         }
         if(this.state.ipfsdata!=null&&this.state.final_record==null)
         {
             return(
-                <div classname={styles2.hospRecords}>
+                <div className={styles2.hospRecords}>
                     <div></div>
                     <div></div>
                     <div></div>
                     <div></div>
                     <div className={styles2.form}>
                         <form className={styles2.insideform} onSubmit={this.handlesubmit}>
-                            <input ref="dpwd" className={styles2.decryptionpassword} type="password" placeholder="Enter Decryption Password" />
+                            <input ref="dpwd" className={styles2.loginpageinput} type="password" placeholder="Enter Decryption Password" />
                             <button className={styles2.loginpagebutton}>Decrypt Records</button>
                         </form>
                     </div>

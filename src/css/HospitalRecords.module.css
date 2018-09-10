@@ -55,3 +55,19 @@
     width: 60%;
   }
   
+  .record{
+    border-width: 0px;
+    align-items: center;
+    height: 30%;
+    width: 90%;
+    background-color: rgb(197, 194, 194,0.2);
+    border-radius: 15px;
+}
+
+.hospitalviewrecord {
+    display: grid;
+    grid-template-rows:5vw 95vw;
+    grid-template-columns:30vw 40vw 30vw;
+    height:100vh;
+}
+
