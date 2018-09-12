@@ -51,6 +51,8 @@ export default class CreateRecord extends Component{
         console.log(pat.pat_id)
         var l2 = Storet.getPatientHash(pat.pat_id,{from: web3.eth.accounts[2], gas:3000000}).toString();
         console.log(l2)
+        //this.props.history.replace(`/hospitalview/${this.props.match.params.id}/${this.props.match.params.pbkey}/${this.props.match.params.pvtkey}`)
+        this.props.history.goBack()
     }
 
     

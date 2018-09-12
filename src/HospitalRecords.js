@@ -30,8 +30,13 @@ export default class HospitalRecords extends Component{
         console.log("viewing records")
         var arr = new Array()
         var arrhash = new Array()
-        const rel = Access.ViewAccess(this.refs.patid.value+this.props.match.params.pbkey).toString()
-        console.log(rel)
+        const rel = await Access.ViewAccess(this.refs.patid.value+this.props.match.params.pbkey).toString()
+        console.log(rel.length)
+        if(rel.length==0)
+        {
+            alert("Access Denied")
+            this.props.history.goBack()
+        }
         var len = rel.split(',').length
         for(var i=0;i<len;i+=2)
         {
@@ -134,7 +139,7 @@ export default class HospitalRecords extends Component{
             
             <div key={count} className={styles2.record}>
                 <p>Record number: {count}</p> 
-                <p>Patient ID: {record.patid}</p>      
+                <p>Patient ID: {record.pat_id}</p>      
                 <p>Date: {record.date}</p>
                 <p>Diagnosis: {record.diagnosis}</p>
                 <p>Location: {record.location}</p>

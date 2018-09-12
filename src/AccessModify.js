@@ -44,13 +44,14 @@ export default class AccessModify extends Component{
         var hashes = this.props.hashes
         var records = this.props.records
         var hkey = this.hosp.value;
-        var rhash = this.hash.value;
-        var combkey = this.props.match.params.id+hkey
-        var ind = hashes.indexOf(rhash)
-        console.log(ind)
-        var rec = records[ind]
-        console.log("hello")
+        var rec = JSON.parse(this.hash.value);
         console.log(rec)
+        var combkey = this.props.match.params.id+hkey
+        var ind = records.findIndex(rec => {rec})
+        var rhash = hashes[ind]
+        console.log(ind)
+        console.log(rhash)
+        console.log("hello")
         //var ans = this.encrypt(hkey.toString(),rec.toString())
         var ans = await fetch(`http://localhost:5000/encryptrecord`,{
             method:"POST",
@@ -96,7 +97,7 @@ export default class AccessModify extends Component{
     renderHash(hash)
     {
         return(
-            <option value={hash}>{hash}</option>
+            <option value={JSON.stringify(hash)}>{hash.diagnosis},{hash.date}</option>
         )
     }
     render()
@@ -115,7 +116,7 @@ export default class AccessModify extends Component{
                        {this.state.hospitals.map(this.renderHosp)}
                         </select>
                         <select className={styles.loginpageinput} id = "dropdown" ref = {(input)=> this.hash = input}>
-                       {this.props.hashes.map(this.renderHash)}
+                       {this.props.records.map(this.renderHash)}
                         </select>
                         <button className={styles.signuppagebutton}>Grant Access</button>
                     </form>
