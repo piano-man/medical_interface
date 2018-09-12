@@ -55,10 +55,10 @@ export default class PatientView extends Component{
         var arr = new Array()
         var arrhash = new Array()
         console.log(this.props.match.params.id)
-        var t0 = performance.now();
+        
         const rel = Storet.getPatientHash(this.props.match.params.id).toString()
-        var t1 = performance.now();
-        console.log(t1-t0);
+        
+        
         console.log(rel)
         var len = rel.split(',').length
         for(var i=0;i<len;i+=2)
@@ -67,7 +67,10 @@ export default class PatientView extends Component{
             var hash = web3.toAscii(rel.split(',')[i]).replace(/[^a-zA-Z0-9]/g, "")+web3.toAscii(rel.split(',')[i+1]).replace(/[^a-zA-Z0-9]/g, "")
             console.log(hash)
             arrhash.push(hash)
+            var t0 = performance.now();
             var ipfsdata = await this.retrieveIpfs(hash)
+            var t1 = performance.now();
+            console.log(t1-t0);
             console.log(ipfsdata)
             arr.push(ipfsdata);  
                       

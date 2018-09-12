@@ -3,7 +3,7 @@ var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
 var abi = JSON.parse('[{"constant":true,"inputs":[{"name":"combinedkey","type":"string"}],"name":"ViewAccess","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"combinedkey","type":"string"},{"name":"hash1","type":"bytes32"},{"name":"hash2","type":"bytes32"}],"name":"GrantAccess","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"combinedkey","type":"string"}],"name":"RevokeAccess","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
 
-var contractAddress = '0x32d538dbc739355fc37df5ebebc1d52c24c35aa3'
+var contractAddress = '0x307cda3b28c0bb80f4168c10e7e9f894725f08ed'
 
 var VotingContract = web3.eth.contract(abi);
 var contractInstance = VotingContract.at(contractAddress);

@@ -45,7 +45,7 @@ export default class Login extends Component{
                         <input ref="patid" className={styles.loginpageinput} type="text" placeholder="Enter Patient ID" />
                         <input ref="lpwd" className={styles.loginpageinput} type="password" placeholder="Enter Login Password" />
                         <button className={styles.loginpagebutton}>Submit</button>
-                        <p class="message" className={styles.msg}>Not registered? <a href="/hospital_signup">Create an account</a></p>                                
+                        <p className={styles.msg}>Not registered? <a href="/hospital_signup">Create an account</a></p>                                
                     </form>                   
                 </div>
                 <div></div>

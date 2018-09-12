@@ -32,7 +32,7 @@ export default class Patient extends Component{
                         </div>
                     </div>
                     <div>
-                        <p class="message" className={styles.msg}>Switch to <a href="/Hospital">Hospital</a></p>      
+                        <p  className={styles.msg}>Switch to <a href="/Hospital">Hospital</a></p>      
                     </div>
                 </div>
             
